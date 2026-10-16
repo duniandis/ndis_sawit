@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Data Bibit Sawit NDIS</title>
+<meta name="theme-color" content="#2e7d32">
+
+<style>
+:root{
+  --bg:#f5f7f4;
+  --card:#ffffff;
+  --text:#1d2a20;
+  --muted:#66736a;
+  --line:#e3e9e4;
+  --accent:#2e7d32;
+  --accent-dark:#1b5e20;
+  --accent-soft:#eaf5eb;
+  --danger:#b3261e;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,
+              "Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.wrap{
+  max-width:1400px;
+  margin:0 auto;
+  padding:24px 16px 48px;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.brand{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:27px;
+}
+
+.brand p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* ===============================
+   CARD
+================================ */
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 8px 28px rgba(0,0,0,.05);
+}
+
+/* ===============================
+   SUMMARY
+================================ */
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.summary-box{
+  background:var(--accent-soft);
+  border:1px solid #d7ead9;
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+}
+
+.summary-box small{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.summary-box strong{
+  color:var(--accent);
+  font-size:22px;
+}
+
+/* ===============================
+   SEARCH
+================================ */
+
+.search-box{
+  margin-bottom:18px;
+}
+
+.search-title{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.search-wrap{
+  display:flex;
+  gap:8px;
+}
+
+.search-wrap input{
+  width:100%;
+  min-width:0;
+  padding:13px 15px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  outline:none;
+  font-size:15px;
+  color:var(--text);
+  background:#fff;
+}
+
+.search-wrap input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(46,125,50,.10);
+}
+
+.search-wrap button{
+  flex:0 0 auto;
+  border:0;
+  background:var(--accent);
+  color:white;
+  border-radius:12px;
+  padding:0 20px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.search-wrap button:hover{
+  background:var(--accent-dark);
+}
+
+.search-info{
+  margin-top:8px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+/* ===============================
+   TABLE DESKTOP
+================================ */
+
+.table-container{
+  width:100%;
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1150px;
+  background:white;
+}
+
+thead{
+  background:var(--accent);
+  color:white;
+}
+
+th{
+  padding:12px 10px;
+  text-align:left;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+td{
+  padding:11px 10px;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+  vertical-align:middle;
+}
+
+tbody tr:hover{
+  background:#f3faf4;
+}
+
+tbody tr:last-child td{
+  border-bottom:0;
+}
+
+.col-no{
+  width:55px;
+  text-align:center;
+}
+
+.id-link{
+  color:var(--accent);
+  font-weight:800;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.id-link:hover{
+  text-decoration:underline;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  font-size:11px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.no-data{
+  text-align:center;
+  padding:30px !important;
+  color:var(--muted);
+}
+
+/* ===============================
+   DETAIL
+================================ */
+
+.detail-wrap{
+  max-width:680px;
+  margin:0 auto;
+}
+
+.id{
+  text-align:center;
+  background:var(--accent-soft);
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:18px;
+}
+
+.id small{
+  display:block;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+
+.id strong{
+  font-size:26px;
+  letter-spacing:1px;
+  color:var(--accent);
+}
+
+.row{
+  display:grid;
+  grid-template-columns:145px 1fr;
+  gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.label{
+  color:var(--muted);
+}
+
+.value{
+  font-weight:600;
+  word-break:break-word;
+}
+
+.back-btn{
+  display:inline-block;
+  margin-bottom:15px;
+  padding:9px 14px;
+  background:var(--accent-soft);
+  color:var(--accent);
+  border-radius:10px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+}
+
+.back-btn:hover{
+  background:#dceede;
+}
+
+.msg{
+  text-align:center;
+  padding:28px 12px;
+  color:var(--muted);
+}
+
+.error{
+  color:var(--danger);
+}
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:16px;
+}
+
+/* ==========================================================
+   MOBILE
+   No | ID | Kode | Varietas | Status
+========================================================== */
+
+@media(max-width:700px){
+
+  .wrap{
+    padding:14px 8px 35px;
+  }
+
+  .brand{
+    margin-bottom:15px;
+  }
+
+  .brand h1{
+    font-size:22px;
+  }
+
+  .brand p{
+    font-size:13px;
+  }
+
+  .card{
+    padding:12px;
+    border-radius:15px;
+  }
+
+  /* SUMMARY */
+
+  .summary{
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+    margin-bottom:18px;
+  }
+
+  .summary-box{
+    padding:10px 3px;
+    border-radius:12px;
+  }
+
+  .summary-box small{
+    font-size:9px;
+  }
+
+  .summary-box strong{
+    font-size:18px;
+  }
+
+  /* SEARCH */
+
+  .search-wrap{
+    gap:6px;
+  }
+
+  .search-wrap input{
+    padding:11px 10px;
+    font-size:14px;
+  }
+
+  .search-wrap button{
+    padding:0 14px;
+    font-size:13px;
+  }
+
+  /* TABLE */
+
+  .table-container{
+    overflow-x:hidden;
+    border-radius:12px;
+  }
+
+  table{
+    width:100%;
+    min-width:0;
+    table-layout:fixed;
+  }
+
+  th,
+  td{
+    padding:10px 4px;
+    font-size:11px;
+  }
+
+  /*
+    Kolom desktop:
+    1  No.
+    2  ID
+    3  Kode
+    4  Varietas
+    5  Semai
+    6  Tanam
+    7  Status
+    8  Blok
+    9  Baris
+    10 Koordinat
+    11 Keterangan
+  */
+
+  /* sembunyikan detail di HP */
+
+  th:nth-child(5),
+  td:nth-child(5),
+
+  th:nth-child(6),
+  td:nth-child(6),
+
+  th:nth-child(8),
+  td:nth-child(8),
+
+  th:nth-child(9),
+  td:nth-child(9),
+
+  th:nth-child(10),
+  td:nth-child(10),
+
+  th:nth-child(11),
+  td:nth-child(11){
+    display:none;
+  }
+
+  /* NO */
+
+  th:nth-child(1),
+  td:nth-child(1){
+    width:8%;
+    text-align:center;
+  }
+
+  /* ID */
+
+  th:nth-child(2),
+  td:nth-child(2){
+    width:25%;
+    white-space:nowrap;
+  }
+
+  /* KODE */
+
+  th:nth-child(3),
+  td:nth-child(3){
+    width:24%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* VARIETAS */
+
+  th:nth-child(4),
+  td:nth-child(4){
+    width:25%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* STATUS */
+
+  th:nth-child(7),
+  td:nth-child(7){
+    width:18%;
+    text-align:center;
+    white-space:nowrap;
+  }
+
+  .id-link{
+    font-size:11px;
+  }
+
+  .status{
+    font-size:9px;
+    padding:4px 5px;
+  }
+
+  /* DETAIL */
+
+  .row{
+    grid-template-columns:110px 1fr;
+    gap:8px;
+  }
+
+  .id strong{
+    font-size:23px;
+  }
+}
+
+/* HP sangat kecil */
+@media(max-width:390px){
+
+  th,
+  td{
+    font-size:10px;
+    padding:9px 3px;
+  }
+
+  .id-link{
+    font-size:10px;
+  }
+
+  .status{
+    font-size:8px;
+  }
+}
+
+
+/* REKAP BIBIT OTOMATIS */
+.rekap-panel{margin:0 0 24px}
+.rekap-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.rekap-heading h2{font-size:18px;margin:0;color:var(--accent-dark)}
+.rekap-heading span{font-size:12px;color:var(--muted)}
+.rekap-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+.rekap-table{min-width:690px;width:100%;border-collapse:collapse}
+.rekap-table th{background:#256b37;color:white;padding:12px 11px;font-size:12px}
+.rekap-table td{padding:11px;border-bottom:1px solid var(--line);font-size:12px}
+.rekap-table tbody tr:nth-child(even){background:#f7fbf7}
+.rekap-table .angka{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.rekap-table tfoot td{background:#e8f4e9;color:#185a29;font-weight:800;border-top:2px solid #b9d9be}
+.rekap-table .ket{overflow-wrap:anywhere}
+@media(max-width:700px){.rekap-heading h2{font-size:16px}.rekap-table th,.rekap-table td{display:table-cell!important;width:auto!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important}.rekap-table{table-layout:auto!important}}
+
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+  <div class="brand">
+    <h1>🌴 Data Bibit Sawit NDIS</h1>
+    <p>Database Bibit & Traceability</p>
+  </div>
+
+  <section class="card" id="app">
+    <div class="msg">Memuat data bibit...</div>
+  </section>
+
+  <div class="footer">
+    Data bersumber dari <strong>ndis_sawit.db</strong>
+  </div>
+
+</main>
+
+<script>
+
+const CSV_URL = "./sawit_ndis.csv";
+
+let ALL_DATA = [];
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(v){
+  return String(v ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+/* =========================================================
+   PARSE CSV
+========================================================= */
+
+function parseCSV(text){
+
+  const rows = [];
+
+  let row = [];
+  let cell = "";
+  let quoted = false;
+
+  for(let i=0; i<text.length; i++){
+
+    const ch = text[i];
+    const next = text[i+1];
+
+    if(ch === '"' && quoted && next === '"'){
+
+      cell += '"';
+      i++;
+
+    }else if(ch === '"'){
+
+      quoted = !quoted;
+
+    }else if(ch === ',' && !quoted){
+
+      row.push(cell);
+      cell = "";
+
+    }else if((ch === '\n' || ch === '\r') && !quoted){
+
+      if(ch === '\r' && next === '\n'){
+        i++;
+      }
+
+      row.push(cell);
+
+      if(row.some(v => v !== "")){
+        rows.push(row);
+      }
+
+      row = [];
+      cell = "";
+
+    }else{
+
+      cell += ch;
+
+    }
+  }
+
+  if(cell.length || row.length){
+
+    row.push(cell);
+
+    if(row.some(v => v !== "")){
+      rows.push(row);
+    }
+  }
+
+  if(rows.length < 2){
+    return [];
+  }
+
+  const headers = rows[0].map(h =>
+    h.replace(/^\uFEFF/, "").trim()
+  );
+
+  return rows.slice(1).map(r => {
+
+    const obj = {};
+
+    headers.forEach((h,idx) => {
+      obj[h] = (r[idx] ?? "").trim();
+    });
+
+    return obj;
+  });
+}
+
+/* =========================================================
+   FORMAT TANGGAL
+========================================================= */
+
+function fmtDate(v){
+
+  if(!v){
+    return "-";
+  }
+
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+
+  return m
+    ? `${m[3]}-${m[2]}-${m[1]}`
+    : v;
+}
+
+/* =========================================================
+   DETAIL BIBIT
+========================================================= */
+
+function showDetail(data){
+
+  const app = document.getElementById("app");
+
+  const coord =
+    data.latitude && data.longitude
+      ? `${data.latitude}, ${data.longitude}`
+      : "-";
+
+  app.innerHTML = `
+
+    <div class="detail-wrap">
+
+      <a href="./" class="back-btn">
+        ← Lihat Semua Data
+      </a>
+
+      <div class="id">
+        <small>ID BIBIT</small>
+        <strong>${escapeHtml(data.id || "-")}</strong>
+      </div>
+
+      <div class="row">
+        <div class="label">Kode</div>
+        <div class="value">${escapeHtml(data.kode || "-")}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Varietas</div>
+        <div class="value">${escapeHtml(data.jenis || "-")}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Tanggal Semai</div>
+        <div class="value">${escapeHtml(fmtDate(data.tanggal_semai))}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Tanggal Tanam</div>
+        <div class="value">${escapeHtml(fmtDate(data.tanggal_tanam))}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Status</div>
+        <div class="value">
+          <span class="status">${escapeHtml(data.status || "-")}</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Blok</div>
+        <div class="value">${escapeHtml(data.blok || "-")}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Baris</div>
+        <div class="value">${escapeHtml(data.baris || "-")}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Koordinat</div>
+        <div class="value">${escapeHtml(coord)}</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Keterangan</div>
+        <div class="value">${escapeHtml(data.keterangan || "-")}</div>
+      </div>
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   NORMALISASI SEARCH
+
+   235       -> NDIS0235
+   0235      -> NDIS0235
+   NDIS0235  -> NDIS0235
+========================================================= */
+
+function normalizeSearch(value){
+
+  let q = String(value || "")
+    .trim()
+    .toUpperCase();
+
+  if(!q){
+    return "";
+  }
+
+  if(/^\d+$/.test(q)){
+    q = "NDIS" + q.padStart(4,"0");
+  }
+
+  return q;
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function filterData(){
+
+  const input =
+    document.getElementById("searchInput");
+
+  if(!input){
+    return;
+  }
+
+  const original =
+    input.value.trim().toUpperCase();
+
+  const normalized =
+    normalizeSearch(original);
+
+  let filtered = ALL_DATA;
+
+  if(original){
+
+    filtered = ALL_DATA.filter(item => {
+
+      const id =
+        String(item.id || "").toUpperCase();
+
+      const kode =
+        String(item.kode || "").toUpperCase();
+
+      return (
+        id.includes(normalized) ||
+        id.includes(original) ||
+        kode.includes(original)
+      );
+
+    });
+  }
+
+  renderTableBody(filtered);
+}
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+function renderTableBody(data){
+
+  const tbody =
+    document.getElementById("tableBody");
+
+  const resultCount =
+    document.getElementById("resultCount");
+
+  if(!tbody){
+    return;
+  }
+
+  if(resultCount){
+    resultCount.textContent =
+      `${data.length} data ditemukan`;
+  }
+
+  if(data.length === 0){
+
+    tbody.innerHTML = `
+
+      <tr>
+        <td colspan="11" class="no-data">
+          Data tidak ditemukan.
+        </td>
+      </tr>
+
+    `;
+
+    return;
+  }
+
+  tbody.innerHTML = data.map((item,index) => {
+
+    const detailURL =
+      `?id=${encodeURIComponent(item.id || "")}`;
+
+    const coord =
+      item.latitude && item.longitude
+        ? `${item.latitude}, ${item.longitude}`
+        : "-";
+
+    return `
+
+      <tr>
+
+        <td class="col-no">
+          ${index + 1}
+        </td>
+
+        <td>
+          <a
+            class="id-link"
+            href="${detailURL}">
+            ${escapeHtml(item.id || "-")}
+          </a>
+        </td>
+
+        <td>
+          ${escapeHtml(item.kode || "-")}
+        </td>
+
+        <td>
+          ${escapeHtml(item.jenis || "-")}
+        </td>
+
+        <td>
+          ${escapeHtml(fmtDate(item.tanggal_semai))}
+        </td>
+
+        <td>
+          ${escapeHtml(fmtDate(item.tanggal_tanam))}
+        </td>
+
+        <td>
+          <span class="status">
+            ${escapeHtml(item.status || "-")}
+          </span>
+        </td>
+
+        <td>
+          ${escapeHtml(item.blok || "-")}
+        </td>
+
+        <td>
+          ${escapeHtml(item.baris || "-")}
+        </td>
+
+        <td>
+          ${escapeHtml(coord)}
+        </td>
+
+        <td>
+          ${escapeHtml(item.keterangan || "-")}
+        </td>
+
+      </tr>
+
+    `;
+
+  }).join("");
+}
+
+/* =========================================================
+   HALAMAN SEMUA DATA
+========================================================= */
+
+/* REKAP OTOMATIS BERDASARKAN CSV */
+function buildRekap(data){
+  const groups = new Map();
+  for(const item of data){
+    const kode = String(item.kode || '').trim();
+    const jenis = String(item.jenis || '').trim();
+    const ket = String(item.keterangan || '').trim();
+    const key = JSON.stringify([kode, jenis, ket]);
+    if(!groups.has(key)) groups.set(key, {kode, jenis, ket, sudah:0, belum:0});
+    const group = groups.get(key);
+    if(String(item.tanggal_tanam || '').trim()) group.sudah++;
+    else group.belum++;
+  }
+  const records = [...groups.values()].sort((a,b) => a.kode.localeCompare(b.kode,'id',{numeric:true}) || a.jenis.localeCompare(b.jenis,'id'));
+  const totalSudah = records.reduce((n,x)=>n+x.sudah,0);
+  const totalBelum = records.reduce((n,x)=>n+x.belum,0);
+  const format = n => n.toLocaleString('id-ID');
+  return `<section class="rekap-panel" aria-label="Rekap bibit sawit">
+    <div class="rekap-heading"><h2>🌴 Rekap Bibit per Kode & Jenis</h2><span>Otomatis dari sawit_ndis.csv</span></div>
+    <div class="rekap-scroll"><table class="rekap-table"><thead><tr>
+      <th>Kode</th><th>Jenis</th><th>Sudah Tanam</th><th>Belum Tanam</th><th>Keterangan</th>
+    </tr></thead><tbody>${records.map(x=>`<tr>
+      <td>${escapeHtml(x.kode || '-')}</td><td>${escapeHtml(x.jenis || '-')}</td>
+      <td class="angka">${format(x.sudah)}</td><td class="angka">${format(x.belum)}</td>
+      <td class="ket">${escapeHtml(x.ket || '-')}</td>
+    </tr>`).join('')}</tbody><tfoot><tr><td colspan="2">TOTAL</td>
+      <td class="angka">${format(totalSudah)}</td><td class="angka">${format(totalBelum)}</td>
+      <td>${format(totalSudah+totalBelum)} pohon</td>
+    </tr></tfoot></table></div></section>`;
+}
+
+function showTable(){
+
+  const app =
+    document.getElementById("app");
+
+  const total =
+    ALL_DATA.length;
+
+  const sudahTanam =
+    ALL_DATA.filter(x =>
+      String(x.tanggal_tanam || "").trim() !== ""
+    ).length;
+
+  const belumTanam =
+    total - sudahTanam;
+
+  app.innerHTML = `
+
+    <div class="summary">
+
+      <div class="summary-box">
+        <small>TOTAL BIBIT</small>
+        <strong>${total}</strong>
+      </div>
+
+      <div class="summary-box">
+        <small>SUDAH TANAM</small>
+        <strong>${sudahTanam}</strong>
+      </div>
+
+      <div class="summary-box">
+        <small>BELUM TANAM</small>
+        <strong>${belumTanam}</strong>
+      </div>
+
+    </div>
+
+    ${buildRekap(ALL_DATA)}
+
+    <div class="search-box">
+
+      <div class="search-title">
+        🔎 Cari Bibit
+      </div>
+
+      <div class="search-wrap">
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Contoh: 235 atau NDIS0235"
+          autocomplete="off">
+
+        <button
+          type="button"
+          onclick="filterData()">
+          Cari
+        </button>
+
+      </div>
+
+      <div class="search-info">
+
+        Ketik nomor saja, misalnya
+        <strong>235</strong>
+        untuk mencari
+        <strong>NDIS0235</strong>.
+
+        <span id="resultCount">
+          ${total} data ditemukan
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th class="col-no">No.</th>
+            <th>ID</th>
+            <th>Kode</th>
+            <th>Varietas</th>
+            <th>Semai</th>
+            <th>Tanam</th>
+            <th>Status</th>
+            <th>Blok</th>
+            <th>Baris</th>
+            <th>Koordinat</th>
+            <th>Keterangan</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+
+      </table>
+
+    </div>
+  `;
+
+  renderTableBody(ALL_DATA);
+
+  const input =
+    document.getElementById("searchInput");
+
+  /* langsung mencari ketika mengetik */
+  input.addEventListener("input",filterData);
+
+  input.addEventListener("keydown",e => {
+
+    if(e.key === "Enter"){
+      filterData();
+    }
+
+  });
+}
+
+/* =========================================================
+   INIT
+========================================================= */
+
+async function init(){
+
+  const app =
+    document.getElementById("app");
+
+  const requestedId =
+    new URLSearchParams(location.search)
+      .get("id");
+
+  try{
+
+    const res =
+      await fetch(
+        `${CSV_URL}?v=${Date.now()}`,
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!res.ok){
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const text =
+      await res.text();
+
+    ALL_DATA =
+      parseCSV(text);
+
+    /* ==========================
+       MODE QR / DETAIL
+    ========================== */
+
+    if(requestedId){
+
+      const found =
+        ALL_DATA.find(x =>
+          String(x.id || "")
+            .toUpperCase()
+          ===
+          requestedId
+            .trim()
+            .toUpperCase()
+        );
+
+      if(!found){
+
+        app.innerHTML = `
+
+          <div class="msg error">
+
+            Data
+            <strong>${escapeHtml(requestedId)}</strong>
+            tidak ditemukan di sawit_ndis.csv.
+
+            <br><br>
+
+            <a href="./" class="back-btn">
+              ← Lihat Semua Data
+            </a>
+
+          </div>
+
+        `;
+
+        return;
+      }
+
+      showDetail(found);
+
+      return;
+    }
+
+    /* ==========================
+       MODE DATABASE
+    ========================== */
+
+    showTable();
+
+  }
+  catch(err){
+
+    app.innerHTML = `
+
+      <div class="msg error">
+
+        Gagal membaca sawit_ndis.csv.
+
+        <br>
+
+        <small>
+          ${escapeHtml(err.message)}
+        </small>
+
+      </div>
+
+    `;
+  }
+}
+
+init();
+
+</script>
+
+</body>
+</html>
