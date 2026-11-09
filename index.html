@@ -533,7 +533,7 @@ tbody tr:last-child td{
 .rekap-heading h2{font-size:18px;margin:0;color:var(--accent-dark)}
 .rekap-heading span{font-size:12px;color:var(--muted)}
 .rekap-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
-.rekap-table{min-width:690px;width:100%;border-collapse:collapse}
+.rekap-table{min-width:900px;width:100%;border-collapse:collapse}
 .rekap-table th{background:#256b37;color:white;padding:12px 11px;font-size:12px}
 .rekap-table td{padding:11px;border-bottom:1px solid var(--line);font-size:12px}
 .rekap-table tbody tr:nth-child(even){background:#f7fbf7}
@@ -939,31 +939,67 @@ function renderTableBody(data){
 ========================================================= */
 
 /* REKAP OTOMATIS BERDASARKAN CSV */
+function parseTanggalBibit(value){
+  const v = String(value || '').trim();
+  let y, m, d, match;
+  if((match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v))){
+    d=+match[1]; m=+match[2]; y=+match[3];
+  }else if((match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v))){
+    y=+match[1]; m=+match[2]; d=+match[3];
+  }else return null;
+  const date = new Date(y,m-1,d);
+  return date.getFullYear()===y && date.getMonth()===m-1 && date.getDate()===d ? date : null;
+}
+function umurBibit(date, today){
+  if(!date || date > today) return '-';
+  let months = (today.getFullYear()-date.getFullYear())*12 + today.getMonth()-date.getMonth();
+  let anchor = new Date(date.getFullYear(), date.getMonth()+months, Math.min(date.getDate(), new Date(date.getFullYear(),date.getMonth()+months+1,0).getDate()));
+  if(anchor > today){
+    months--;
+    anchor = new Date(date.getFullYear(),date.getMonth()+months,Math.min(date.getDate(),new Date(date.getFullYear(),date.getMonth()+months+1,0).getDate()));
+  }
+  const days = Math.round((today-anchor)/86400000);
+  return `${months ? months+' Bulan ' : ''}${days} Hari`;
+}
+function ringkasanUmur(dates, today){
+  if(!dates.length) return '-';
+  const unique = [...new Set(dates.map(d=>d.getTime()))].sort((a,b)=>a-b);
+  const first = umurBibit(new Date(unique[0]),today);
+  const last = umurBibit(new Date(unique[unique.length-1]),today);
+  return first===last ? first : `${last} – ${first}`;
+}
 function buildRekap(data){
   const groups = new Map();
+  const today = new Date();
+  today.setHours(0,0,0,0);
   for(const item of data){
     const kode = String(item.kode || '').trim();
     const jenis = String(item.jenis || '').trim();
     const ket = String(item.keterangan || '').trim();
-    const key = JSON.stringify([kode, jenis, ket]);
-    if(!groups.has(key)) groups.set(key, {kode, jenis, ket, sudah:0, belum:0});
+    const key = JSON.stringify([kode,jenis,ket]);
+    if(!groups.has(key)) groups.set(key,{kode,jenis,ket,sudah:0,belum:0,semai:[],tanam:[]});
     const group = groups.get(key);
+    const semai = parseTanggalBibit(item.tanggal_semai);
+    const tanam = parseTanggalBibit(item.tanggal_tanam);
+    if(semai) group.semai.push(semai);
     if(String(item.tanggal_tanam || '').trim()) group.sudah++;
     else group.belum++;
+    if(tanam) group.tanam.push(tanam);
   }
-  const records = [...groups.values()].sort((a,b) => a.kode.localeCompare(b.kode,'id',{numeric:true}) || a.jenis.localeCompare(b.jenis,'id'));
+  const records = [...groups.values()].sort((a,b)=>a.kode.localeCompare(b.kode,'id',{numeric:true}) || a.jenis.localeCompare(b.jenis,'id'));
   const totalSudah = records.reduce((n,x)=>n+x.sudah,0);
   const totalBelum = records.reduce((n,x)=>n+x.belum,0);
   const format = n => n.toLocaleString('id-ID');
   return `<section class="rekap-panel" aria-label="Rekap bibit sawit">
     <div class="rekap-heading"><h2>🌴 Rekap Bibit per Kode & Jenis</h2><span>Otomatis dari sawit_ndis.csv</span></div>
     <div class="rekap-scroll"><table class="rekap-table"><thead><tr>
-      <th>Kode</th><th>Jenis</th><th>Sudah Tanam</th><th>Belum Tanam</th><th>Keterangan</th>
+      <th>Kode</th><th>Jenis</th><th>Umur Semai</th><th>Umur Tanam</th><th>Sudah Tanam</th><th>Belum Tanam</th><th>Keterangan</th>
     </tr></thead><tbody>${records.map(x=>`<tr>
       <td>${escapeHtml(x.kode || '-')}</td><td>${escapeHtml(x.jenis || '-')}</td>
+      <td>${escapeHtml(ringkasanUmur(x.semai,today))}</td><td>${escapeHtml(ringkasanUmur(x.tanam,today))}</td>
       <td class="angka">${format(x.sudah)}</td><td class="angka">${format(x.belum)}</td>
       <td class="ket">${escapeHtml(x.ket || '-')}</td>
-    </tr>`).join('')}</tbody><tfoot><tr><td colspan="2">TOTAL</td>
+    </tr>`).join('')}</tbody><tfoot><tr><td colspan="4">TOTAL</td>
       <td class="angka">${format(totalSudah)}</td><td class="angka">${format(totalBelum)}</td>
       <td>${format(totalSudah+totalBelum)} pohon</td>
     </tr></tfoot></table></div></section>`;
