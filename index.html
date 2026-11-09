@@ -991,7 +991,7 @@ function buildRekap(data){
   const totalBelum = records.reduce((n,x)=>n+x.belum,0);
   const format = n => n.toLocaleString('id-ID');
   return `<section class="rekap-panel" aria-label="Rekap bibit sawit">
-    <div class="rekap-heading"><h2>🌴 Rekap Bibit per Kode & Jenis</h2><span>Otomatis dari sawit_ndis.csv</span></div>
+    <div class="rekap-heading"><h2>🌴 Rekap Bibit per Kode & Jenis</h2><span>Otomatis dari database</span></div>
     <div class="rekap-scroll"><table class="rekap-table"><thead><tr>
       <th>Kode</th><th>Jenis</th><th>Umur Semai</th><th>Umur Tanam</th><th>Sudah Tanam</th><th>Belum Tanam</th><th>Keterangan</th>
     </tr></thead><tbody>${records.map(x=>`<tr>
